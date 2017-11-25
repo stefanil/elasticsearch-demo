@@ -31,7 +31,7 @@ TODO
   * mass data
 * try with [Java High Level Rest Client's Bulk Api](https://www.elastic.co/guide/en/elasticsearch/client/java-rest/current/java-rest-high-document-bulk.html)
 
-Links:
+### Some Links
 * https://www.elastic.co/blog/found-keeping-elasticsearch-in-sync
 * https://www.elastic.co/guide/en/elasticsearch/client/java-api/current/java-docs-bulk.html
 * https://github.com/jprante/elasticsearch-jdbc
