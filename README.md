@@ -22,7 +22,7 @@
   * mass data
 * try with [Java High Level Rest Client's Bulk Api](https://www.elastic.co/guide/en/elasticsearch/client/java-rest/current/java-rest-high-document-bulk.html)
 
-## Access from a Web Client
+## The Best Way to Access from a Web Client
 TODO
 
 Links:
