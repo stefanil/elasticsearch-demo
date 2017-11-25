@@ -1,9 +1,9 @@
 # Elasticsearch Demo
 
-## Do It
+## Do
 TODO
 
-## Conceptual
+## Think
 The primary question. How to realize a performing search from a web client?
 
 ### Technologies
