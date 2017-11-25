@@ -1,19 +1,29 @@
 # Elasticsearch Demo
 
 ## Contents
-* postgres db ..  canonical data base
 * elastic search .. indexed data base
-* kibana .. rest client 
-* spring java service .. synchronize / access elastic search api
+* postgres db ..  canonical data base
+* kibana .. rest client
+* spring java service .. **synchronize & access** elastic search api
+
+## Access Elastic Search from Java
+* [Official Java Clients](https://www.elastic.co/guide/en/elasticsearch/client/java-rest/current/index.html)
+  * [Java Low Level Rest Client](https://www.elastic.co/guide/en/elasticsearch/client/java-rest/current/java-rest-low.html)
+  * [Java High Level Rest Client](https://www.elastic.co/guide/en/elasticsearch/client/java-rest/current/java-rest-high.html)
 
 ## Synchronization of Canonical Database and Elastic Search
-1. [Bulk API - Java Client](https://www.elastic.co/guide/en/elasticsearch/client/java-api/current/java-docs-bulk.html)
-2. [JDBC River](https://github.com/jprante/elasticsearch-jdbc)
 
-## Access Elastic Search
-* [Official Java Clients](https://www.elastic.co/guide/en/elasticsearch/client/java-rest/current/index.html)
-** [Java Low Level Rest Client](https://www.elastic.co/guide/en/elasticsearch/client/java-rest/current/java-rest-low.html)
-** [Java High Level Rest Client](https://www.elastic.co/guide/en/elasticsearch/client/java-rest/current/java-rest-high.html)
+### [JDBC River](https://github.com/jprante/elasticsearch-jdbc)
+* poll tabular data in a frequent slot of time
+
+### [Bulk API - Java Client](https://www.elastic.co/guide/en/elasticsearch/client/java-api/current/java-docs-bulk.html)
+* use for 
+  * your **custom implementation**
+  * mass data
+* try with [Java High Level Bulk Rest Client Api](https://www.elastic.co/guide/en/elasticsearch/client/java-rest/current/java-rest-high-document-bulk.html)
+
+## Access from a Web Client
+TODO
 
 Links:
 * https://www.elastic.co/blog/found-keeping-elasticsearch-in-sync
