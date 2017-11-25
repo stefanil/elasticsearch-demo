@@ -11,9 +11,9 @@
 2. [JDBC River](https://github.com/jprante/elasticsearch-jdbc)
 
 ## Access Elastic Search
-1. [Official Java Clients](https://www.elastic.co/guide/en/elasticsearch/client/java-rest/current/index.html)
-1.a [Java Low Level Rest Client](https://www.elastic.co/guide/en/elasticsearch/client/java-rest/current/java-rest-low.html)
-1.b [Java High Level Rest Client](https://www.elastic.co/guide/en/elasticsearch/client/java-rest/current/java-rest-high.html)
+* [Official Java Clients](https://www.elastic.co/guide/en/elasticsearch/client/java-rest/current/index.html)
+** [Java Low Level Rest Client](https://www.elastic.co/guide/en/elasticsearch/client/java-rest/current/java-rest-low.html)
+** [Java High Level Rest Client](https://www.elastic.co/guide/en/elasticsearch/client/java-rest/current/java-rest-high.html)
 
 Links:
 * https://www.elastic.co/blog/found-keeping-elasticsearch-in-sync
