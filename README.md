@@ -12,7 +12,7 @@ The primary question. How to realize a performing search from a web client?
 * **kibana** .. rest client
 * **spring boot** .. **synchronize & access** elastic search api
 * **docker compose** .. compose containers
-* **gradle** -- start / stop composition
+* **gradle** .. start / stop composition
 
 ### Access Elastic Search from Java
 * [Official Java Clients](https://www.elastic.co/guide/en/elasticsearch/client/java-rest/current/index.html)
