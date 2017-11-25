@@ -12,9 +12,6 @@ The primary question. How to realize a performing search from a web client?
 * kibana .. rest client
 * spring java service .. **synchronize & access** elastic search api
 
-### The Best Way to Access from a Web Client
-TODO
-
 ### Access Elastic Search from Java
 * [Official Java Clients](https://www.elastic.co/guide/en/elasticsearch/client/java-rest/current/index.html)
   * [Java Low Level Rest Client](https://www.elastic.co/guide/en/elasticsearch/client/java-rest/current/java-rest-low.html)
@@ -30,6 +27,9 @@ TODO
 
 #### [JDBC River](https://github.com/jprante/elasticsearch-jdbc)
 * poll tabular data in a frequent slot of time
+
+### The Best Way to Access from a Web Client
+TODO
 
 ### Further Links
 * https://www.elastic.co/blog/found-keeping-elasticsearch-in-sync
