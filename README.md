@@ -20,7 +20,7 @@
 * use for 
   * your **custom implementation**
   * mass data
-* try with [Java High Level Bulk Rest Client Api](https://www.elastic.co/guide/en/elasticsearch/client/java-rest/current/java-rest-high-document-bulk.html)
+* try with [Java High Level Test Client's Bulk Api](https://www.elastic.co/guide/en/elasticsearch/client/java-rest/current/java-rest-high-document-bulk.html)
 
 ## Access from a Web Client
 TODO
