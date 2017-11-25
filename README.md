@@ -12,7 +12,7 @@ The primary question. How to realize a performing search from a web client?
 * kibana .. rest client
 * spring java service .. **synchronize & access** elastic search api
 
-## The Best Way to Access from a Web Client
+### The Best Way to Access from a Web Client
 TODO
 
 ### Access Elastic Search from Java
