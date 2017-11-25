@@ -6,7 +6,7 @@
 * kibana .. rest client 
 * spring java service .. synchronize / access elastic search api
 
-## Snychronization of Canonical Database and Elastic Search
+## Synchronization of Canonical Database and Elastic Search
 1. [Bulk API - Java Client](https://www.elastic.co/guide/en/elasticsearch/client/java-api/current/java-docs-bulk.html)
 2. [JDBC River](https://github.com/jprante/elasticsearch-jdbc)
 
