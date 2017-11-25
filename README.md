@@ -22,14 +22,14 @@ TODO
 
 ### Synchronization of Canonical Database and Elastic Search
 
-#### [JDBC River](https://github.com/jprante/elasticsearch-jdbc)
-* poll tabular data in a frequent slot of time
-
 #### [Bulk API - Java Client](https://www.elastic.co/guide/en/elasticsearch/client/java-api/current/java-docs-bulk.html)
 * use for 
   * your **custom implementation**
   * mass data
 * try with [Java High Level Rest Client's Bulk Api](https://www.elastic.co/guide/en/elasticsearch/client/java-rest/current/java-rest-high-document-bulk.html)
+
+#### [JDBC River](https://github.com/jprante/elasticsearch-jdbc)
+* poll tabular data in a frequent slot of time
 
 ### Further Links
 * https://www.elastic.co/blog/found-keeping-elasticsearch-in-sync
