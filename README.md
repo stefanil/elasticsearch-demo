@@ -18,6 +18,11 @@ The primary question. How to realize a performing search from a web client?
 * [Official Java Clients](https://www.elastic.co/guide/en/elasticsearch/client/java-rest/current/index.html)
   * [Java Low Level Rest Client](https://www.elastic.co/guide/en/elasticsearch/client/java-rest/current/java-rest-low.html)
   * [Java High Level Rest Client](https://www.elastic.co/guide/en/elasticsearch/client/java-rest/current/java-rest-high.html)
+    * *added with 6.0.0-beta1: available with current release 6.0.0?*
+
+### ES in the Cloud
+* [AWS Elasticsearch-Service](https://aws.amazon.com/de/elasticsearch-service/)
+  * *synchronization mechanisms?*
 
 ### Synchronization of Canonical Database and Elastic Search
 
@@ -26,12 +31,19 @@ The primary question. How to realize a performing search from a web client?
   * your **custom implementation**
   * mass data
 * try with [Java High Level Rest Client's Bulk Api](https://www.elastic.co/guide/en/elasticsearch/client/java-rest/current/java-rest-high-document-bulk.html)
+* 2 approaches:
+  * **event driven** on  saving and when initializing the database
+  * **scheduled** from a custom JSON table, which holds tabular data in JSON format
 
 #### [JDBC River](https://github.com/jprante/elasticsearch-jdbc)
 * poll tabular data in a frequent slot of time
+* connection via JDBC layer does not conform to microservice approach
+* only for simple table with no deep relations
+  * customization must be maintained
 
-### The Best Way to Access from a Web Client
-TODO
+### Access from a Web Client
+* *separate ES endpoint vs. custom endpoint for adaption of result?*
+  * *adaption of ES search response via service layer needed?*
 
 ### Further Links
 * https://www.elastic.co/blog/found-keeping-elasticsearch-in-sync
