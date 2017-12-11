@@ -1,0 +1,171 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Elasticsearch-Demo",
+		"_postman_id": "b947aea8-2c9a-898b-b618-537007051579",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Search For All",
+			"request": {
+				"url": "http://localhost:9200/_search",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"query\": {\r\n    \"match_all\": {}\r\n  }\r\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Create Index \"arteria\" with Type \"product\"",
+			"request": {
+				"url": "http://localhost:9200/arteria",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"settings\": {\r\n    \"number_of_replicas\": 1,\r\n    \"number_of_shards\": 3\r\n  },\r\n  \"mappings\": {\r\n    \"product\": {\r\n      \"properties\": {\r\n        \"name\": {\r\n          \"type\": \"text\"\r\n        },\r\n        \"description\": {\r\n          \"type\": \"text\"\r\n        }\r\n      }\r\n    }\r\n  }\r\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Create Document 1",
+			"request": {
+				"url": "http://localhost:9200/arteria/product",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Tisch und Stuhl und Fisch\",\r\n  \"description\": \"Ein Tisch und Stuhl 1\"\r\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Create Document 2",
+			"request": {
+				"url": "http://localhost:9200/arteria/product",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Tisch\",\r\n  \"description\": \"Ein Tisch\"\r\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Create Document 3",
+			"request": {
+				"url": "http://localhost:9200/arteria/product",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Stuhl\",\r\n  \"description\": \"Ein Stuhl\"\r\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Create Document 4",
+			"request": {
+				"url": "http://localhost:9200/arteria/product",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Fisch\",\r\n  \"description\": \"Ein Fisch\"\r\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Search for Product with Name \"Tisch\"",
+			"request": {
+				"url": "http://localhost:9200/_msearch",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"index\": \"arteria\", \"type\": \"product\" }\r\n{ \"query\": { \"bool\": {\"must\": [  {\"query_string\": {\"default_field\": \"*\",\"query\": \"name:tisch\", \"analyze_wildcard\": true}}]}}}\r\n"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Search for Product with Name \"Tisch\" (With Wildcard)",
+			"request": {
+				"url": "http://localhost:9200/_msearch",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"index\": \"arteria\", \"type\": \"product\" }\r\n{ \"query\": { \"bool\": {\"must\": [  {\"query_string\": {\"default_field\": \"*\",\"query\": \"name:tis*\", \"analyze_wildcard\": true}}]}}}\r\n"
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
