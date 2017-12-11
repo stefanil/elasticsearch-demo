@@ -1,7 +1,15 @@
 # Elasticsearch Demo
 
 ## Do
-TODO
+
+### Run
+* start docker composition: `[...]\elasticsearch-demo\compose\src\main\resources$ docker-compose up -d`
+* see kibana in action: `http://localhost:5601`
+
+### Compose
+* [elastic docker images](https://www.docker.elastic.co/)
+  * [Install Elasticsearch 6.0 with Docker](https://www.elastic.co/guide/en/elasticsearch/reference/6.0/docker.html)
+  * [Install Kibana 6.0 with Docker](https://www.elastic.co/guide/en/kibana/6.0/docker.html)
 
 ## Think
 The primary question. How to realize a performing search from a web client?
