@@ -5,6 +5,7 @@
 ### Run
 * start docker composition: `[...]\elasticsearch-demo\compose\src\main\resources$ docker-compose up -d`
 * see kibana in action: `http://localhost:5601`
+  * you may use kibana's dev tools to run some sample queries
 
 ### Compose
 * [elastic docker images](https://www.docker.elastic.co/)
