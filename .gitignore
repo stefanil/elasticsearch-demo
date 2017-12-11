@@ -1,0 +1,6 @@
+# BUILD
+.gradle
+
+# IDE
+.idea
+elasticsearch-demo.iml
