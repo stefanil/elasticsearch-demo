@@ -7,10 +7,6 @@ allprojects { allproject ->
 
   apply plugin: 'base'
 
-  allproject.configurations.all {
-    resolutionStrategy.cacheChangingModulesFor 0, 'seconds'        // check for updates every build
-  }
-
   repositories {
     mavenLocal()
     mavenCentral()
