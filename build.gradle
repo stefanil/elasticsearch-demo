@@ -1,5 +1,3 @@
-//import com.sun.xml.internal.ws.util.StringUtils
-
 allprojects { allproject ->
 
   allproject.ext.dockerContainerPrefix = 'arteria'
@@ -12,14 +10,6 @@ allprojects { allproject ->
   allproject.configurations.all {
     resolutionStrategy.cacheChangingModulesFor 0, 'seconds'        // check for updates every build
   }
-
-//  // show all task names on gradlew tasks
-//  allproject.ext.taskName = { String... names ->
-//    StringUtils.uncapitalize(names.toList().plus(0, allproject.path)
-//        .collectMany { it.tokenize('-.:') }.collect { it as String }
-//        .collect { StringUtils.capitalize(it.toLowerCase()) }
-//        .join(''))
-//  }
 
   repositories {
     mavenLocal()
