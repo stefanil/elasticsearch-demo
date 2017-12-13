@@ -1,7 +1,5 @@
 allprojects { allproject ->
 
-  allproject.ext.dockerContainerPrefix = 'arteria'
-
   group 'org.devel.elasticsearch-demo'
   version '0.0.1-SNAPSHOT'
 
