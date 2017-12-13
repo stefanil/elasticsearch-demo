@@ -31,6 +31,12 @@ import static org.assertj.core.api.Assertions.fail;
 
 /**
  * @see <a href=
+ *      "https://www.elastic.co/guide/en/elasticsearch/client/java-rest/current/java-rest-high-document-index.html">Index
+ *      API Doc</a>
+ * @see <a href=
+ *      "https://www.elastic.co/guide/en/elasticsearch/client/java-rest/current/java-rest-high-document-delete.html">Delete
+ *      API Doc</a>
+ * @see <a href=
  *      "https://www.elastic.co/guide/en/elasticsearch/client/java-rest/current/java-rest-high-search.html">Search
  *      API Doc</a>
  * @see <a href=
@@ -52,10 +58,10 @@ public class SearchApiTest {
         new HttpHost("localhost", 9200, "http")));
 
     indexProduct("1", "Tisch und Stuhl und Fisch",
-        "Ein Tisch und ein Stuhl und ein Fisch");
-    indexProduct("2", "Tisch", "Ein Tisch");
-    indexProduct("3", "Stuhl", "Ein Stuhl");
-    indexProduct("4", "Fisch", "Ein Fisch");
+        "Ein Tisch und ein Stuhl und ein Fisch", 100);
+    indexProduct("2", "Tisch", "Ein Tisch", 200);
+    indexProduct("3", "Stuhl", "Ein Stuhl", 300);
+    indexProduct("4", "Fisch", "Ein Fisch", 400);
 
     sourceBuilder = new SearchSourceBuilder()
         .query(QueryBuilders.termQuery("name", "tisch"))
@@ -126,41 +132,87 @@ public class SearchApiTest {
 
   @Test
   public void shouldFindMatchQuery() throws Exception {
-    // todo
+    assertThat(client.search(searchRequest.source(
+        sourceBuilder.query(QueryBuilders.matchQuery("name", "tisch")))).getHits().getTotalHits())
+            .isEqualTo(2L);
+    assertThat(client.search(searchRequest.source(
+        sourceBuilder.query(QueryBuilders.matchQuery("name", "t?sch")))).getHits().getTotalHits())
+            .isEqualTo(0L);
   }
 
   @Test
-  public void shouldFindTermQuery() throws Exception {
-    // todo
+  public void shouldFindExactPhrase() throws Exception {
+    final SearchResponse response = client.search(searchRequest.source(
+        sourceBuilder.query(QueryBuilders.matchPhraseQuery("description", "ein stuhl"))));
+    assertThat(response.getHits().getTotalHits()).isEqualTo(2L);
+    assertThat(response.getHits().getAt(0).getId()).isEqualTo("1");
+    assertThat(response.getHits().getAt(1).getId()).isEqualTo("3");
   }
 
   @Test
-  public void shouldHighlightFragments() throws Exception {
-    // todo
+  public void shouldFindOrCombinedTerm() throws Exception {
+    final SearchResponse response = client.search(searchRequest.source(
+        sourceBuilder.query(QueryBuilders.termsQuery("name", "tisch", "stuhl"))));
+    assertThat(response.getHits().getTotalHits()).isEqualTo(3L);
+    assertThat(response.getHits().getAt(0).getId()).isEqualTo("2");
+    assertThat(response.getHits().getAt(1).getId()).isEqualTo("1");
+    assertThat(response.getHits().getAt(2).getId()).isEqualTo("3");
   }
 
   @Test
-  public void shouldRetrieveAggregations() throws Exception {
-    // todo
+  public void shouldFindAndCombinedTerm() throws Exception {
+    final SearchResponse response = client.search(searchRequest.source(
+        sourceBuilder.query(QueryBuilders.boolQuery()
+            .must(QueryBuilders.termQuery("name", "tisch"))
+            .must(QueryBuilders.termQuery("name", "stuhl")))));
+    assertThat(response.getHits().getTotalHits()).isEqualTo(1L);
+    assertThat(response.getHits().getAt(0).getId()).isEqualTo("1");
   }
 
   @Test
-  public void shouldRetrieveSuggestions() throws Exception {
-    // todo
+  public void shouldFindXorCombinedTerm() throws Exception {
+    final SearchResponse response = client.search(searchRequest.source(
+        sourceBuilder.query(QueryBuilders.boolQuery()
+            .should(QueryBuilders.boolQuery()
+                .must(QueryBuilders.termQuery("name", "tisch"))
+                .mustNot(QueryBuilders.termQuery("name", "stuhl")))
+            .should(QueryBuilders.boolQuery()
+                .mustNot(QueryBuilders.termQuery("name", "tisch"))
+                .must(QueryBuilders.termQuery("name", "stuhl"))))));
+    assertThat(response.getHits().getTotalHits()).isEqualTo(2L);
+    assertThat(response.getHits().getAt(0).getId()).isEqualTo("2");
+    assertThat(response.getHits().getAt(1).getId()).isEqualTo("3");
   }
 
   @Test
-  public void name() throws Exception {
+  public void shouldFindRanges() throws Exception {
+    final SearchResponse response = client.search(searchRequest.source(
+        sourceBuilder.query(QueryBuilders.rangeQuery("price").gte(200).lte(300))));
+    assertThat(response.getHits().getTotalHits()).isEqualTo(2L);
+    assertThat(response.getHits().getAt(0).getId()).isEqualTo("2");
+    assertThat(response.getHits().getAt(1).getId()).isEqualTo("3");
   }
 
-  private void indexProduct(final String documentId, final String name, final String description)
+  @Test
+  public void shouldExcludeTerm() throws Exception {
+    final SearchResponse response = client.search(searchRequest.source(
+        sourceBuilder.query(QueryBuilders.boolQuery()
+            .must(QueryBuilders.termQuery("name", "tisch"))
+            .mustNot(QueryBuilders.termQuery("name", "stuhl")))));
+    assertThat(response.getHits().getTotalHits()).isEqualTo(1L);
+    assertThat(response.getHits().getAt(0).getId()).isEqualTo("2");
+  }
+
+  private void indexProduct(final String documentId, final String name, final String description,
+      final Object price)
       throws IOException {
     final IndexRequest request = new IndexRequest(INDEX, TYPE, documentId)
         .timeout(TimeValue.timeValueSeconds(10))
         .setRefreshPolicy(RefreshPolicy.IMMEDIATE) // do not use in production
         .opType(OpType.INDEX) // replace existing document with same id
         .source("name", name, // field: [name, value]
-            "description", description);
+            "description", description,
+            "price", price);
 
     try {
       final IndexResponse response = client.index(request);
