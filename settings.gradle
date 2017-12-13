@@ -1,2 +1,4 @@
 include 'compose'
+include 'search'
+include 'search:java-client'
 
