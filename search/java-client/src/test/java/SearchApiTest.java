@@ -119,12 +119,13 @@ public class SearchApiTest {
   }
 
   @Test
-  public void shouldFindMatchQuery() throws Exception {
-    // todo
+  public void shouldFindWildcardQuery() throws Exception {
+    executeWildcardQuery("name", "?isch", 3L);
+    executeWildcardQuery("name", "st*", 2L);
   }
 
   @Test
-  public void shouldFindWildcardQuery() throws Exception {
+  public void shouldFindMatchQuery() throws Exception {
     // todo
   }
 
@@ -139,7 +140,7 @@ public class SearchApiTest {
   }
 
   @Test
-  public void shoulkdRetrieveAggregations() throws Exception {
+  public void shouldRetrieveAggregations() throws Exception {
     // todo
   }
 
@@ -177,5 +178,13 @@ public class SearchApiTest {
         .timeout(TimeValue.timeValueSeconds(10));
     final DeleteResponse response = client.delete(request);
     assertThat(response.getResult()).isIn(Result.DELETED, Result.NOT_FOUND);
+  }
+
+  private void executeWildcardQuery(final String fieldName, final String pattern,
+      final long totalHits) throws IOException {
+    final SearchResponse searchResponse = client.search(searchRequest.source(
+        sourceBuilder.query(QueryBuilders.wildcardQuery(fieldName, pattern))));
+
+    assertThat(searchResponse.getHits().getTotalHits()).isEqualTo(totalHits);
   }
 }
