@@ -98,7 +98,7 @@ public class SearchApiTest {
     assertThat(firstHit.getType()).isEqualTo(TYPE);
     assertThat(firstHit.getScore()).isEqualTo(0.6931472f);
     assertThat(firstHit.getSourceAsString())
-        .isEqualTo("{\"name\":\"Tisch\",\"description\":\"Ein Tisch\"}");
+        .isEqualTo("{\"name\":\"Tisch\",\"description\":\"Ein Tisch\",\"price\":200}");
   }
 
   @Test
