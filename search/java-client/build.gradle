@@ -5,7 +5,7 @@ sourceCompatibility = 1.8
 dependencies {
   testCompile 'junit:junit:4.12'
   testCompile 'org.assertj:assertj-core:3.8.0'
-  textCompile 'com.google.guava:guava:21.0'
+  testCompile 'com.google.guava:guava:21.0'
   testCompile 'org.elasticsearch.client:elasticsearch-rest-high-level-client:6.0.1'
 }
 
