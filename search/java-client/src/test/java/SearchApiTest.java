@@ -215,6 +215,20 @@ public class SearchApiTest {
     assertThat(response.getHits().getAt(1).getId()).isEqualTo("1");
   }
 
+  @Test
+  public void shouldBoostRanking() throws Exception {
+    final SearchResponse response = client.search(searchRequest.source(
+        sourceBuilder.query(QueryBuilders.boolQuery()
+            .must(QueryBuilders.queryStringQuery("(name: tisch)^10 (description: tisc)^20 (name: tisc*)^10 (description: tisc*)^20 (name:*tisc*)^10 (description:*tisc*)^20")
+                .analyzeWildcard(true)
+                .defaultField("*")))));
+    assertThat(response.getHits().getTotalHits()).isEqualTo(2L);
+    assertThat(response.getHits().getAt(0).getId()).isEqualTo("2");
+    assertThat(response.getHits().getAt(0).getScore()).isEqualTo(66.93147f);
+    assertThat(response.getHits().getAt(1).getId()).isEqualTo("1");
+    assertThat(response.getHits().getAt(1).getScore()).isEqualTo(62.87682f);
+  }
+
   private void indexProduct(final String documentId, final String name, final String description,
       final Object price)
       throws IOException {
