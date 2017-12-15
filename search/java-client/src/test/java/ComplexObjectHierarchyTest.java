@@ -85,8 +85,8 @@ public class ComplexObjectHierarchyTest {
     final SearchResponse response = client.search(searchRequest.source(
         sourceBuilder.query(QueryBuilders.boolQuery()
             .must(QueryBuilders
-                .queryStringQuery(
-                    "(name: tisch)^10 (description: tisch)^20 (features: aufbauservice)^5")
+                .queryStringQuery(  // case insensitive as lowercase analyzer is used by default
+                    "(name: Tisch)^10 (description: Tisch)^20 (features: Aufbauservice)^5")
                 .analyzeWildcard(true)
                 .defaultField("*")))));
      assertThat(response.getHits().getTotalHits()).isEqualTo(2L);
