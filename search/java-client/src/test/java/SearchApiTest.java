@@ -203,6 +203,18 @@ public class SearchApiTest {
     assertThat(response.getHits().getAt(0).getId()).isEqualTo("2");
   }
 
+  @Test
+  public void shouldSearchOnAllFields() throws Exception {
+    final SearchResponse response = client.search(searchRequest.source(
+        sourceBuilder.query(QueryBuilders.boolQuery()
+            .must(QueryBuilders.queryStringQuery("tisch")
+              .analyzeWildcard(true)
+              .defaultField("*")))));
+    assertThat(response.getHits().getTotalHits()).isEqualTo(2L);
+    assertThat(response.getHits().getAt(0).getId()).isEqualTo("2");
+    assertThat(response.getHits().getAt(1).getId()).isEqualTo("1");
+  }
+
   private void indexProduct(final String documentId, final String name, final String description,
       final Object price)
       throws IOException {
